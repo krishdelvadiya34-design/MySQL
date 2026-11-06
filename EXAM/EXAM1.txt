@@ -1,0 +1,112 @@
+===============================
+A. SELECT and WHERE :
+
+1. SELECT * FROM EMPLOYEES;
+
+2. SELECT Employee_Name,Department,Salary FROM EMPLOYEES;
+
+3. SELECT * FROM EMPLOYEES WHERE Department = "IT";
+
+4. SELECT * FROM EMPLOYEES WHERE Salary > 60000;
+
+5. SELECT * FROM EMPLOYEES WHERE experience_years >= 3;
+
+6. SELECT * FROM EMPLOYEES WHERE City = "Rajkot";
+
+7. SELECT * FROM EMPLOYEES WHERE joining_year >= 2022;
+
+8. SELECT * FROM EMPLOYEES WHERE Salary > 40000 AND Salary < 65000;
+
+==============================
+
+B. AND,OR,NOT:
+
+9. SELECT * FROM EMPLOYEES WHERE Salary > 60000 AND WHERE department = "IT";
+
+10. SELECT * FROM EMPLOYEES WHERE City = "Rajkot" OR WHERE City = "Surat";
+
+11. SELECT * FROM EMPLOYEES WHERE Department != "Sales";
+
+12. SELECT * FROM EMPLOYEES WHERE experience_years >= 4 Salary > 50000;
+
+13. SELECT * FROM EMPLOYEES WHERE Salary >= 50000 AND WHERE Department = "HR" OR "Finance";
+
+14. SELECT * FROM EMPLOYEES WHERE City != "Ahmedabad";
+
+==============================
+
+C. ORDER BY and LIMIT:
+
+15. SELECT * FROM EMPLOYEES ORDER BY Salary DESC;
+
+16. SELECT * FROM EMPLOYEES ORDER BY employee_name ASC;
+
+17. SELECT * FROM EMPLOYEES ORDER BY Salary DESC LIMIT 5;
+
+18. SELECT * FROM EMPLOYEES ORDER BY Salary ASC LIMIT 3;
+
+19. SELECT * FROM EMPLOYEES ORDER BY experience_years ASC LIMIT 5;
+
+===============================
+
+D. Aggregate Functions:
+
+20. SELECT COUNT(*) FROM EMPLOYEES;
+
+21. SELECT MAX(Salary) FROM EMPLOYEES;
+
+22. SELECT MIN(Salary) FROM EMPLOYEES;
+
+23. SELECT AVG(Salary) FROM EMPLOYEES;
+
+24. SELECT SUM(Salary) FROM EMPLOYEES;
+
+25. SELECT AVG(experience_years) FROM EMPLOYEES;
+
+=================================
+
+E. GROUP BY:
+
+26. SELECT Department,COUNT(Department) FROM EMPLOYEES GROUP BY DEPARTMENT;
+
+27. SELECT Department,AVG(Salary) FROM EMPLOYEES GROUP BY DEPARTMENT;
+
+28. SELECT Department,MAX(Salary) FROM EMPLOYEES GROUP BY DEPARTMENT;
+
+29. SELECT City,MIN(Salary) FROM EMPLOYEES GROUP BY City;
+
+30. SELECT Department,SUM(Salary) FROM EMPLOYEES GROUP BY DEPARTMENT;
+
+31. SELECT City,COUNT(City) FROM EMPLOYEES GROUP BY City;
+
+=================================
+
+F. HAVING:
+
+32. SELECT Department,COUNT(Department) FROM EMPLOYEES GROUP BY Department HAVING COUNT(Department) > 3;
+
+33. SELECT Department,AVG(Salary) FROM EMPLOYEES GROUP BY Department HAVING AVG(Salary) > 55000;
+
+34. SELECT City,COUNT(City) FROM EMPLOYEES GROUP BY City HAVING COUNT(City) >= 4;
+
+35. SELECT Department,SUM(Salary) FROM EMPLOYEES GROUP BY Department HAVING SUM(Salary) > 150000;
+
+================================
+
+G. Combined Queries:
+
+36. SELECT Department,AVG(Salary) FROM EMPLOYEES GROUP BY Department ORDER BY Salary DESC LIMIT 3;
+
+37. SELECT Department,COUNT(Department) FROM EMPLOYEES GROUP BY Department ORDER BY Department DESC;
+
+38. SELECT City,AVG(Salary) FROM EMPLOYEES GROUP BY City HAVING AVG(Salary) > 50000 ORDER BY Salary DESC;
+
+39. SELECT Department,COUNT(Department),AVG(Salary) FROM EMPLOYEES GROUP BY Department HAVING COUNT(Department) > 2 AND AVG(Salary) > 45000;
+
+40. SELECT * FROM EMPLOYEES WHERE department = "IT" ORDER BY Salary DESC LIMIT 5;
+
+41. SELECT * FROM EMPLOYEES WHERE Salary > 45000 AND City = "Rajkot" OR "Surat" ORDER BY Salary DESC;
+
+42. SELECT Department,COUNT(Salary),AVG(Salary) FROM EMPLOYEES GROUP BY Department HAVING AVG(Salary)>45000;
+
+43. SELECT Department,MIN(Salary) FROM EMPLOYEES GROUP BY Department HAVING MIN(Salary) > 40000 ORDER BY Salary ASC;

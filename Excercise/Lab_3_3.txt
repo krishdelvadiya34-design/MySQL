@@ -1,0 +1,67 @@
+SUB QUERY :
+
+=======================================================================================
+
+1.
+
+mysql> CREATE TABLE EMPLOYEE (
+    ->     EMP_ID INT PRIMARY KEY,
+    ->     EMP_NAME VARCHAR(50),
+    ->     SALARY DECIMAL(10,2),
+    ->     DEPARTMENT VARCHAR(30),
+    ->     CITY VARCHAR(30),
+    ->     EXPERIENCE INT
+    -> );
+Query OK, 0 rows affected (0.329 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES
+    -> (1, 'Rahul', 30000, 'IT', 'Rajkot', 2),
+    -> (2, 'Amit', 45000, 'HR', 'Surat', 4),
+    -> (3, 'Priya', 55000, 'IT', 'Ahmedabad', 5),
+    -> (4, 'Neha', 35000, 'Sales', 'Rajkot', 3),
+    -> (5, 'Karan', 60000, 'Finance', 'Surat', 6),
+    -> (6, 'Sneha', 40000, 'HR', 'Ahmedabad', 3),
+    -> (7, 'Jay', 70000, 'IT', 'Rajkot', 7),
+    -> (8, 'Mehul', 25000, 'Sales', 'Surat', 1),
+    -> (9, 'Riya', 50000, 'Finance', 'Ahmedabad', 5),
+    -> (10, 'Dev', 65000, 'IT', 'Surat', 6),
+    -> (11, 'Anjali', 32000, 'HR', 'Rajkot', 2),
+    -> (12, 'Vikas', 80000, 'Finance', 'Ahmedabad', 8);
+Query OK, 12 rows affected (0.176 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+------------+-----------+------------+
+| EMP_ID | EMP_NAME | SALARY   | DEPARTMENT | CITY      | EXPERIENCE |
++--------+----------+----------+------------+-----------+------------+
+|      1 | Rahul    | 30000.00 | IT         | Rajkot    |          2 |
+|      2 | Amit     | 45000.00 | HR         | Surat     |          4 |
+|      3 | Priya    | 55000.00 | IT         | Ahmedabad |          5 |
+|      4 | Neha     | 35000.00 | Sales      | Rajkot    |          3 |
+|      5 | Karan    | 60000.00 | Finance    | Surat     |          6 |
+|      6 | Sneha    | 40000.00 | HR         | Ahmedabad |          3 |
+|      7 | Jay      | 70000.00 | IT         | Rajkot    |          7 |
+|      8 | Mehul    | 25000.00 | Sales      | Surat     |          1 |
+|      9 | Riya     | 50000.00 | Finance    | Ahmedabad |          5 |
+|     10 | Dev      | 65000.00 | IT         | Surat     |          6 |
+|     11 | Anjali   | 32000.00 | HR         | Rajkot    |          2 |
+|     12 | Vikas    | 80000.00 | Finance    | Ahmedabad |          8 |
++--------+----------+----------+------------+-----------+------------+
+12 rows in set (0.342 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE SALARY > (SELECT AVG(SALARY) FROM EMPLOYEE);
++--------+----------+----------+------------+-----------+------------+
+| EMP_ID | EMP_NAME | SALARY   | DEPARTMENT | CITY      | EXPERIENCE |
++--------+----------+----------+------------+-----------+------------+
+|      3 | Priya    | 55000.00 | IT         | Ahmedabad |          5 |
+|      5 | Karan    | 60000.00 | Finance    | Surat     |          6 |
+|      7 | Jay      | 70000.00 | IT         | Rajkot    |          7 |
+|      9 | Riya     | 50000.00 | Finance    | Ahmedabad |          5 |
+|     10 | Dev      | 65000.00 | IT         | Surat     |          6 |
+|     12 | Vikas    | 80000.00 | Finance    | Ahmedabad |          8 |
++--------+----------+----------+------------+-----------+------------+
+6 rows in set (0.009 sec)
+
+===================================================================================================================
+
+2.

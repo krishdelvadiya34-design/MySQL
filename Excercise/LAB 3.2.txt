@@ -1,0 +1,394 @@
+mysql> USE LAB_3_2;
+Database changed
+
+================================================================================================
+
+CROSS JOIN:
+
+1.
+
+mysql> CREATE TABLE Products (
+    -> p_name VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.821 sec)
+
+mysql> CREATE TABLE CUSTOMERS (
+    -> C_NAME VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.664 sec)
+
+mysql> INSERT INTO PRODUCTS VALUES ("LAPTOP"),("MOBILE");
+Query OK, 2 rows affected (0.545 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM PRODUCTS;
++--------+
+| p_name |
++--------+
+| LAPTOP |
+| MOBILE |
++--------+
+2 rows in set (0.469 sec)
+
+mysql> INSERT INTO CUSTOMERS VALUES ("KRISH"),("ALAY"),("BHAVY");
+Query OK, 3 rows affected (0.515 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CUSTOMERS;
++--------+
+| C_NAME |
++--------+
+| KRISH  |
+| ALAY   |
+| BHAVY  |
++--------+
+3 rows in set (0.007 sec)
+
+mysql> SELECT C_NAME,P_NAME FROM CUSTOMERS
+    -> CROSS JOIN
+    -> PRODUCTS;
++--------+--------+
+| C_NAME | P_NAME |
++--------+--------+
+| KRISH  | MOBILE |
+| KRISH  | LAPTOP |
+| ALAY   | MOBILE |
+| ALAY   | LAPTOP |
+| BHAVY  | MOBILE |
+| BHAVY  | LAPTOP |
++--------+--------+
+6 rows in set (0.009 sec)
+
+================================================================================================
+2.
+
+mysql> CREATE TABLE SALES(
+    -> EMP_ID INT PRIMARY KEY
+    -> );
+Query OK, 0 rows affected (0.608 sec)
+
+mysql> CREATE TABLE TARGET_GOALS (
+    -> SALES_TARGET INT
+    -> );
+Query OK, 0 rows affected (0.579 sec)
+
+mysql> INSERT INTO SALES VALUES (101),(102),(103);
+Query OK, 3 rows affected (0.553 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO TARGET_GOALS VALUES (100000),(200000),(300000);
+Query OK, 3 rows affected (0.466 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM SALES;
++--------+
+| EMP_ID |
++--------+
+|    101 |
+|    102 |
+|    103 |
++--------+
+3 rows in set (0.005 sec)
+
+mysql> SELECT * FROM TARGET_GOALS;
++--------------+
+| SALES_TARGET |
++--------------+
+|       100000 |
+|       200000 |
+|       300000 |
++--------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT EMP_ID,SALES_TARGET FROM SALES
+    -> CROSS JOIN
+    -> TARGET_GOALS;
++--------+--------------+
+| EMP_ID | SALES_TARGET |
++--------+--------------+
+|    103 |       100000 |
+|    102 |       100000 |
+|    101 |       100000 |
+|    103 |       200000 |
+|    102 |       200000 |
+|    101 |       200000 |
+|    103 |       300000 |
+|    102 |       300000 |
+|    101 |       300000 |
++--------+--------------+
+9 rows in set (0.005 sec)
+
+================================================================================================
+3.
+
+mysql> CREATE TABLE RESTAURANTS (
+    -> R_NAME VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.584 sec)
+
+mysql> CREATE TABLE LOCATIONS (
+    -> R_LOCATIONS VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.573 sec)
+
+mysql> INSERT INTO RESTAURANTS VALUES ("KRISHNA"),("RADHE"),("SHREE RAM");
+Query OK, 3 rows affected (0.058 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO LOCATIONS VALUES ("RAJKOT"),("VADODRA"),("SURAT");
+Query OK, 3 rows affected (0.524 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM RESTAURANTS;
++-----------+
+| R_NAME    |
++-----------+
+| KRISHNA   |
+| RADHE     |
+| SHREE RAM |
++-----------+
+3 rows in set (0.007 sec)
+
+mysql> SELECT * FROM LOCATIONS;
++-------------+
+| R_LOCATIONS |
++-------------+
+| RAJKOT      |
+| VADODRA     |
+| SURAT       |
++-------------+
+3 rows in set (0.006 sec)
+
+mysql> SELECT R_NAME,R_LOCATIONS FROM RESTAURANTS
+    -> CROSS JOIN
+    -> LOCATIONS;
++-----------+-------------+
+| R_NAME    | R_LOCATIONS |
++-----------+-------------+
+| SHREE RAM | RAJKOT      |
+| RADHE     | RAJKOT      |
+| KRISHNA   | RAJKOT      |
+| SHREE RAM | VADODRA     |
+| RADHE     | VADODRA     |
+| KRISHNA   | VADODRA     |
+| SHREE RAM | SURAT       |
+| RADHE     | SURAT       |
+| KRISHNA   | SURAT       |
++-----------+-------------+
+9 rows in set (0.008 sec)
+
+================================================================================================
+
+4.
+
+mysql> CREATE TABLE STUDENTS_NAMES (
+    -> NAME VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.700 sec)
+
+mysql> CREATE TABLE COURSES (
+    -> COURSE_NAMES VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.741 sec)
+
+mysql> INSERT INTO STUDENTS_NAMES VALUES("JACK"),("BARBOSSA"),("WILLIAM");
+Query OK, 3 rows affected (0.089 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM STUDENTS_NAMES;
++----------+
+| NAME     |
++----------+
+| JACK     |
+| BARBOSSA |
+| WILLIAM  |
++----------+
+3 rows in set (0.006 sec)
+
+mysql> INSERT INTO COURSES VALUES ("PYTHON"),("HTML"),("SQL");
+Query OK, 3 rows affected (0.478 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM COURSES;
++--------------+
+| COURSE_NAMES |
++--------------+
+| PYTHON       |
+| HTML         |
+| SQL          |
++--------------+
+3 rows in set (0.006 sec)
+
+mysql> SELECT NAME,COURSE_NAMES FROM STUDENTS_NAMES
+    -> CROSS JOIN
+    -> COURSES;
++----------+--------------+
+| NAME     | COURSE_NAMES |
++----------+--------------+
+| WILLIAM  | PYTHON       |
+| BARBOSSA | PYTHON       |
+| JACK     | PYTHON       |
+| WILLIAM  | HTML         |
+| BARBOSSA | HTML         |
+| JACK     | HTML         |
+| WILLIAM  | SQL          |
+| BARBOSSA | SQL          |
+| JACK     | SQL          |
++----------+--------------+
+9 rows in set (0.009 sec)
+
+================================================================================================
+
+5.
+
+mysql> CREATE TABLE HOTELS (
+    -> H_NAME VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.629 sec)
+
+mysql> CREATE TABLE SEASONS (
+    -> S_NAME VARCHAR(50),
+    -> PRICE INT
+    -> );
+Query OK, 0 rows affected (0.630 sec)
+
+mysql> INSERT INTO HOTELS VALUES ("GREEN HOTEL"),("IMPERIAL HOTEL"),("KRISHNA HOTEL");
+Query OK, 3 rows affected (0.549 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO SEASONS VALUES ("SUMMER",50000),("WINTER",100000),("MONSOON",70000);
+Query OK, 3 rows affected (0.562 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM HOTELS;
++----------------+
+| H_NAME         |
++----------------+
+| GREEN HOTEL    |
+| IMPERIAL HOTEL |
+| KRISHNA HOTEL  |
++----------------+
+3 rows in set (0.008 sec)
+
+mysql> SELECT * FROM SEASONS;
++---------+--------+
+| S_NAME  | PRICE  |
++---------+--------+
+| SUMMER  |  50000 |
+| WINTER  | 100000 |
+| MONSOON |  70000 |
++---------+--------+
+3 rows in set (0.008 sec)
+
+mysql> SELECT H_NAME,S_NAME,PRICE FROM HOTELS
+    -> CROSS JOIN
+    -> SEASONS
+    -> ORDER BY H_NAME;
++----------------+---------+--------+
+| H_NAME         | S_NAME  | PRICE  |
++----------------+---------+--------+
+| GREEN HOTEL    | SUMMER  |  50000 |
+| GREEN HOTEL    | WINTER  | 100000 |
+| GREEN HOTEL    | MONSOON |  70000 |
+| IMPERIAL HOTEL | SUMMER  |  50000 |
+| IMPERIAL HOTEL | WINTER  | 100000 |
+| IMPERIAL HOTEL | MONSOON |  70000 |
+| KRISHNA HOTEL  | SUMMER  |  50000 |
+| KRISHNA HOTEL  | WINTER  | 100000 |
+| KRISHNA HOTEL  | MONSOON |  70000 |
++----------------+---------+--------+
+9 rows in set (0.012 sec)
+
+================================================================================================
+
+SELF JOIN:
+
+1.
+
+mysql> CREATE TABLE EMPLOYEES (
+    -> EMP_ID INT ,
+    -> EMP_NAME VARCHAR(30),
+    -> MANAGER_NAME VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.189 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES (101,"KRISH",NULL);
+Query OK, 1 row affected (0.558 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES (102,"VEDANG",101);
+Query OK, 1 row affected (0.052 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES (103,"DHYEY",101);
+Query OK, 1 row affected (0.520 sec)
+
+mysql> INSERT INTO EMPLOYEES VALUES (104,"BHAVY",103);
+Query OK, 1 row affected (0.487 sec)
+
+mysql> SELECT * FROM EMPLOYEES;
++--------+----------+--------------+
+| EMP_ID | EMP_NAME | MANAGER_NAME |
++--------+----------+--------------+
+|    101 | KRISH    | NULL         |
+|    102 | VEDANG   | 101          |
+|    103 | DHYEY    | 101          |
+|    104 | BHAVY    | 103          |
++--------+----------+--------------+
+4 rows in set (0.007 sec)
+
+mysql> SELECT A.EMP_NAME,B.EMP_NAME FROM EMPLOYEES AS A
+    -> LEFT JOIN
+    -> EMPLOYEES AS B
+    -> ON A.MANAGER_NAME = B.EMP_ID;
++----------+----------+
+| EMP_NAME | EMP_NAME |
++----------+----------+
+| KRISH    | NULL     |
+| VEDANG   | KRISH    |
+| DHYEY    | KRISH    |
+| BHAVY    | DHYEY    |
++----------+----------+
+4 rows in set (0.010 sec)
+
+================================================================================================
+
+2.
+
+mysql> CREATE TABLE CUSTOMERS_2 (
+    -> CUSTOMER_ID INT,
+    -> CUSTOMER_NAME VARCHAR(50),
+    -> REFERRER_ID INT
+    -> );
+Query OK, 0 rows affected (0.692 sec)
+
+mysql> INSERT INTO CUSTOMERS_2 VALUES (1001,"TONY",NULL),(1002,"STEVE",1001),(1003,"THOR",1002),(1004,"LOKI",1003),(1005,"NATASHA",1001),(1006,"RODY",1001);
+Query OK, 6 rows affected (0.503 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CUSTOMERS_2;
++-------------+---------------+-------------+
+| CUSTOMER_ID | CUSTOMER_NAME | REFERRER_ID |
++-------------+---------------+-------------+
+|        1001 | TONY          |        NULL |
+|        1002 | STEVE         |        1001 |
+|        1003 | THOR          |        1002 |
+|        1004 | LOKI          |        1003 |
+|        1005 | NATASHA       |        1001 |
+|        1006 | RODY          |        1001 |
++-------------+---------------+-------------+
+6 rows in set (0.007 sec)
+
+mysql> SELECT A.CUSTOMER_NAME,B.CUSTOMER_NAME FROM CUSTOMERS_2 AS A
+    -> LEFT JOIN
+    -> CUSTOMERS_2 AS B
+    -> ON A.REFERRER_ID = B.CUSTOMER_ID;
++---------------+---------------+
+| CUSTOMER_NAME | CUSTOMER_NAME |
++---------------+---------------+
+| TONY          | NULL          |
+| STEVE         | TONY          |
+| THOR          | STEVE         |
+| LOKI          | THOR          |
+| NATASHA       | TONY          |
+| RODY          | TONY          |
++---------------+---------------+
+6 rows in set (0.009 sec)

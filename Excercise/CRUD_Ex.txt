@@ -1,0 +1,284 @@
+Enter password: ******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 26.10.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE product_db;
+Query OK, 1 row affected (0.524 sec)
+
+mysql> USE product_db;
+Database changed
+mysql> CREATE TABLE products(
+    -> id INT PRIMARY KEY AUTO_INCREMENT,
+    -> name VARCHAR(100),
+    -> brand VARCHAR(50),
+    -> category VARCHAR(50),
+    -> price DECIMAL(10,2),
+    -> quantity INT
+    -> );
+Query OK, 0 rows affected (0.697 sec)
+
+mysql> INSERT INTO products VALUES (1,"Galaxy S24","Samsung","Mobile",75000.00,10)
+    -> ;
+Query OK, 1 row affected (0.879 sec)
+
+mysql> INSERT INTO products VALUES (2,"Iphone 15","Apple","Mobile",65000.00,8);
+Query OK, 1 row affected (0.487 sec)
+
+mysql> INSERT INTO products VALUES (3,"Ideapad Slim 3","Lenovo","Laptop",45000.00,12);
+Query OK, 1 row affected (0.471 sec)
+
+mysql> INSERT INTO products VALUES (4,"Pavilion 15","HP","Laptop",58000.00,5);
+Query OK, 1 row affected (0.478 sec)
+
+mysql> INSERT INTO products VALUES (5,"Noise Colorfit","Noise","Watch",2500.00,20);
+Query OK, 1 row affected (0.474 sec)
+
+mysql> INSERT INTO products VALUES (6,"Galaxy Watch 6","Samsung","Watch",22000.00,7);
+Query OK, 1 row affected (0.473 sec)
+
+mysql> INSERT INTO products VALUES (7,"Air Max","Nike","Shoes",8500.00,15);
+Query OK, 1 row affected (0.476 sec)
+
+mysql> INSERT INTO products VALUES (8,"Superstar","Adidas","Shoes",6000.00,18);
+Query OK, 1 row affected (0.157 sec)
+
+mysql> INSERT INTO products VALUES (9,"Ipad 10th Gen","Apple","Tablet",40000.00,6);
+Query OK, 1 row affected (0.091 sec)
+
+mysql> INSERT INTO products VALUES (10,"Readme Pad SE","Xiaomi","Tablet",38000.00,9);
+Query OK, 1 row affected (0.483 sec)
+
+mysql> INSERT INTO products VALUES (11,"OnePlus 12","OnePlus","Mobile",64999,10);
+Query OK, 1 row affected (0.490 sec)
+
+mysql> INSERT INTO products (id,name,brand,category,price,quantity)
+    -> VALUES
+    -> (12,"POCO M6 Plus","POCO","Mobile",20000,10),
+    -> (13,"Moto G45 5G","MOTOROLA","Mobile",12000,10);
+Query OK, 2 rows affected (0.490 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO products VALUES (14,"BOAT Nirvana","BOAT","TWS",3500,25);
+Query OK, 1 row affected (0.141 sec)
+
+mysql> INSERT INTO products VALUES (15,"DELL APEX 10","DELL","Laptop",55000,7);
+Query OK, 1 row affected (0.476 sec)
+
+mysql> INSERT INTO products (name,brand,category,price,quantity) VALUES ("NU Public","NU Republic","Speaker",2000,8);
+Query OK, 1 row affected (0.532 sec)
+
+mysql> SELECT * FROM products;
++----+----------------+-------------+----------+----------+----------+
+| id | name           | brand       | category | price    | quantity |
++----+----------------+-------------+----------+----------+----------+
+|  1 | Galaxy S24     | Samsung     | Mobile   | 75000.00 |       10 |
+|  2 | Iphone 15      | Apple       | Mobile   | 65000.00 |        8 |
+|  3 | Ideapad Slim 3 | Lenovo      | Laptop   | 45000.00 |       12 |
+|  4 | Pavilion 15    | HP          | Laptop   | 58000.00 |        5 |
+|  5 | Noise Colorfit | Noise       | Watch    |  2500.00 |       20 |
+|  6 | Galaxy Watch 6 | Samsung     | Watch    | 22000.00 |        7 |
+|  7 | Air Max        | Nike        | Shoes    |  8500.00 |       15 |
+|  8 | Superstar      | Adidas      | Shoes    |  6000.00 |       18 |
+|  9 | Ipad 10th Gen  | Apple       | Tablet   | 40000.00 |        6 |
+| 10 | Readme Pad SE  | Xiaomi      | Tablet   | 38000.00 |        9 |
+| 11 | OnePlus 12     | OnePlus     | Mobile   | 64999.00 |       10 |
+| 12 | POCO M6 Plus   | POCO        | Mobile   | 20000.00 |       10 |
+| 13 | Moto G45 5G    | MOTOROLA    | Mobile   | 12000.00 |       10 |
+| 14 | BOAT Nirvana   | BOAT        | TWS      |  3500.00 |       25 |
+| 15 | DELL APEX 10   | DELL        | Laptop   | 55000.00 |        7 |
+| 16 | NU Public      | NU Republic | Speaker  |  2000.00 |        8 |
++----+----------------+-------------+----------+----------+----------+
+16 rows in set (0.468 sec)
+
+mysql> SELECT name,brand,price FROM products;
++----------------+-------------+----------+
+| name           | brand       | price    |
++----------------+-------------+----------+
+| Galaxy S24     | Samsung     | 75000.00 |
+| Iphone 15      | Apple       | 65000.00 |
+| Ideapad Slim 3 | Lenovo      | 45000.00 |
+| Pavilion 15    | HP          | 58000.00 |
+| Noise Colorfit | Noise       |  2500.00 |
+| Galaxy Watch 6 | Samsung     | 22000.00 |
+| Air Max        | Nike        |  8500.00 |
+| Superstar      | Adidas      |  6000.00 |
+| Ipad 10th Gen  | Apple       | 40000.00 |
+| Readme Pad SE  | Xiaomi      | 38000.00 |
+| OnePlus 12     | OnePlus     | 64999.00 |
+| POCO M6 Plus   | POCO        | 20000.00 |
+| Moto G45 5G    | MOTOROLA    | 12000.00 |
+| BOAT Nirvana   | BOAT        |  3500.00 |
+| DELL APEX 10   | DELL        | 55000.00 |
+| NU Public      | NU Republic |  2000.00 |
++----------------+-------------+----------+
+16 rows in set (0.011 sec)
+
+mysql> SELECT * FROM products WHERE category = "Mobile";
++----+--------------+----------+----------+----------+----------+
+| id | name         | brand    | category | price    | quantity |
++----+--------------+----------+----------+----------+----------+
+|  1 | Galaxy S24   | Samsung  | Mobile   | 75000.00 |       10 |
+|  2 | Iphone 15    | Apple    | Mobile   | 65000.00 |        8 |
+| 11 | OnePlus 12   | OnePlus  | Mobile   | 64999.00 |       10 |
+| 12 | POCO M6 Plus | POCO     | Mobile   | 20000.00 |       10 |
+| 13 | Moto G45 5G  | MOTOROLA | Mobile   | 12000.00 |       10 |
++----+--------------+----------+----------+----------+----------+
+5 rows in set (0.010 sec)
+
+mysql> SELECT * FROM products WHERE price > 20000;
++----+----------------+---------+----------+----------+----------+
+| id | name           | brand   | category | price    | quantity |
++----+----------------+---------+----------+----------+----------+
+|  1 | Galaxy S24     | Samsung | Mobile   | 75000.00 |       10 |
+|  2 | Iphone 15      | Apple   | Mobile   | 65000.00 |        8 |
+|  3 | Ideapad Slim 3 | Lenovo  | Laptop   | 45000.00 |       12 |
+|  4 | Pavilion 15    | HP      | Laptop   | 58000.00 |        5 |
+|  6 | Galaxy Watch 6 | Samsung | Watch    | 22000.00 |        7 |
+|  9 | Ipad 10th Gen  | Apple   | Tablet   | 40000.00 |        6 |
+| 10 | Readme Pad SE  | Xiaomi  | Tablet   | 38000.00 |        9 |
+| 11 | OnePlus 12     | OnePlus | Mobile   | 64999.00 |       10 |
+| 15 | DELL APEX 10   | DELL    | Laptop   | 55000.00 |        7 |
++----+----------------+---------+----------+----------+----------+
+9 rows in set (0.463 sec)
+
+mysql> SELECT * FROM products WHERE price < 40000 AND price > 5000;
++----+----------------+----------+----------+----------+----------+
+| id | name           | brand    | category | price    | quantity |
++----+----------------+----------+----------+----------+----------+
+|  6 | Galaxy Watch 6 | Samsung  | Watch    | 22000.00 |        7 |
+|  7 | Air Max        | Nike     | Shoes    |  8500.00 |       15 |
+|  8 | Superstar      | Adidas   | Shoes    |  6000.00 |       18 |
+| 10 | Readme Pad SE  | Xiaomi   | Tablet   | 38000.00 |        9 |
+| 12 | POCO M6 Plus   | POCO     | Mobile   | 20000.00 |       10 |
+| 13 | Moto G45 5G    | MOTOROLA | Mobile   | 12000.00 |       10 |
++----+----------------+----------+----------+----------+----------+
+6 rows in set (0.010 sec)
+
+mysql> SELECT * FROM products WHERE quantity < 10;
++----+----------------+-------------+----------+----------+----------+
+| id | name           | brand       | category | price    | quantity |
++----+----------------+-------------+----------+----------+----------+
+|  2 | Iphone 15      | Apple       | Mobile   | 65000.00 |        8 |
+|  4 | Pavilion 15    | HP          | Laptop   | 58000.00 |        5 |
+|  6 | Galaxy Watch 6 | Samsung     | Watch    | 22000.00 |        7 |
+|  9 | Ipad 10th Gen  | Apple       | Tablet   | 40000.00 |        6 |
+| 10 | Readme Pad SE  | Xiaomi      | Tablet   | 38000.00 |        9 |
+| 15 | DELL APEX 10   | DELL        | Laptop   | 55000.00 |        7 |
+| 16 | NU Public      | NU Republic | Speaker  |  2000.00 |        8 |
++----+----------------+-------------+----------+----------+----------+
+7 rows in set (0.009 sec)
+
+mysql> SELECT * FROM products WHERE brand = "Samsung";
++----+----------------+---------+----------+----------+----------+
+| id | name           | brand   | category | price    | quantity |
++----+----------------+---------+----------+----------+----------+
+|  1 | Galaxy S24     | Samsung | Mobile   | 75000.00 |       10 |
+|  6 | Galaxy Watch 6 | Samsung | Watch    | 22000.00 |        7 |
++----+----------------+---------+----------+----------+----------+
+2 rows in set (0.010 sec)
+
+mysql> SELECT * FROM products ORDER BY price ASC;
++----+----------------+-------------+----------+----------+----------+
+| id | name           | brand       | category | price    | quantity |
++----+----------------+-------------+----------+----------+----------+
+| 16 | NU Public      | NU Republic | Speaker  |  2000.00 |        8 |
+|  5 | Noise Colorfit | Noise       | Watch    |  2500.00 |       20 |
+| 14 | BOAT Nirvana   | BOAT        | TWS      |  3500.00 |       25 |
+|  8 | Superstar      | Adidas      | Shoes    |  6000.00 |       18 |
+|  7 | Air Max        | Nike        | Shoes    |  8500.00 |       15 |
+| 13 | Moto G45 5G    | MOTOROLA    | Mobile   | 12000.00 |       10 |
+| 12 | POCO M6 Plus   | POCO        | Mobile   | 20000.00 |       10 |
+|  6 | Galaxy Watch 6 | Samsung     | Watch    | 22000.00 |        7 |
+| 10 | Readme Pad SE  | Xiaomi      | Tablet   | 38000.00 |        9 |
+|  9 | Ipad 10th Gen  | Apple       | Tablet   | 40000.00 |        6 |
+|  3 | Ideapad Slim 3 | Lenovo      | Laptop   | 45000.00 |       12 |
+| 15 | DELL APEX 10   | DELL        | Laptop   | 55000.00 |        7 |
+|  4 | Pavilion 15    | HP          | Laptop   | 58000.00 |        5 |
+| 11 | OnePlus 12     | OnePlus     | Mobile   | 64999.00 |       10 |
+|  2 | Iphone 15      | Apple       | Mobile   | 65000.00 |        8 |
+|  1 | Galaxy S24     | Samsung     | Mobile   | 75000.00 |       10 |
++----+----------------+-------------+----------+----------+----------+
+16 rows in set (0.462 sec)
+
+mysql> SELECT * FROM products ORDER BY price DESC LIMIT 5;
++----+--------------+---------+----------+----------+----------+
+| id | name         | brand   | category | price    | quantity |
++----+--------------+---------+----------+----------+----------+
+|  1 | Galaxy S24   | Samsung | Mobile   | 75000.00 |       10 |
+|  2 | Iphone 15    | Apple   | Mobile   | 65000.00 |        8 |
+| 11 | OnePlus 12   | OnePlus | Mobile   | 64999.00 |       10 |
+|  4 | Pavilion 15  | HP      | Laptop   | 58000.00 |        5 |
+| 15 | DELL APEX 10 | DELL    | Laptop   | 55000.00 |        7 |
++----+--------------+---------+----------+----------+----------+
+5 rows in set (0.011 sec)
+
+mysql> SELECT * FROM products WHERE name like "Galaxy %";
++----+----------------+---------+----------+----------+----------+
+| id | name           | brand   | category | price    | quantity |
++----+----------------+---------+----------+----------+----------+
+|  1 | Galaxy S24     | Samsung | Mobile   | 75000.00 |       10 |
+|  6 | Galaxy Watch 6 | Samsung | Watch    | 22000.00 |        7 |
++----+----------------+---------+----------+----------+----------+
+2 rows in set (0.009 sec)
+
+mysql> SELECT COUNT(name) FROM products;
++-------------+
+| COUNT(name) |
++-------------+
+|          16 |
++-------------+
+1 row in set (0.009 sec)
+
+mysql> SELECT MIN(price),MAX(price) FROM products;
++------------+------------+
+| MIN(price) | MAX(price) |
++------------+------------+
+|    2000.00 |   75000.00 |
++------------+------------+
+1 row in set (0.009 sec)
+
+mysql> SELECT SUM(quantity) FROM products;
++---------------+
+| SUM(quantity) |
++---------------+
+|           180 |
++---------------+
+1 row in set (0.453 sec)
+
+mysql> SELECT * FROM products WHERE category = "Laptop" OR category = "Tablet";
++----+----------------+--------+----------+----------+----------+
+| id | name           | brand  | category | price    | quantity |
++----+----------------+--------+----------+----------+----------+
+|  3 | Ideapad Slim 3 | Lenovo | Laptop   | 45000.00 |       12 |
+|  4 | Pavilion 15    | HP     | Laptop   | 58000.00 |        5 |
+|  9 | Ipad 10th Gen  | Apple  | Tablet   | 40000.00 |        6 |
+| 10 | Readme Pad SE  | Xiaomi | Tablet   | 38000.00 |        9 |
+| 15 | DELL APEX 10   | DELL   | Laptop   | 55000.00 |        7 |
++----+----------------+--------+----------+----------+----------+
+5 rows in set (0.014 sec)
+
+mysql> SELECT * FROM products WHERE price > 10000 AND quantity > 5;
++----+----------------+----------+----------+----------+----------+
+| id | name           | brand    | category | price    | quantity |
++----+----------------+----------+----------+----------+----------+
+|  1 | Galaxy S24     | Samsung  | Mobile   | 75000.00 |       10 |
+|  2 | Iphone 15      | Apple    | Mobile   | 65000.00 |        8 |
+|  3 | Ideapad Slim 3 | Lenovo   | Laptop   | 45000.00 |       12 |
+|  6 | Galaxy Watch 6 | Samsung  | Watch    | 22000.00 |        7 |
+|  9 | Ipad 10th Gen  | Apple    | Tablet   | 40000.00 |        6 |
+| 10 | Readme Pad SE  | Xiaomi   | Tablet   | 38000.00 |        9 |
+| 11 | OnePlus 12     | OnePlus  | Mobile   | 64999.00 |       10 |
+| 12 | POCO M6 Plus   | POCO     | Mobile   | 20000.00 |       10 |
+| 13 | Moto G45 5G    | MOTOROLA | Mobile   | 12000.00 |       10 |
+| 15 | DELL APEX 10   | DELL     | Laptop   | 55000.00 |        7 |
++----+----------------+----------+----------+----------+----------+
+10 rows in set (0.010 sec)

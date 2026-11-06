@@ -1,0 +1,250 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rnw                |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.121 sec)
+
+mysql> USE RNW;
+Database changed
+mysql> CREATE TABLE courses (    course_id INT PRIMARY KEY,    course_name VARCHAR(50));
+Query OK, 0 rows affected (0.125 sec)
+
+mysql> INSERT INTO courses (course_id, course_name)VALUES(1001, 'AI/ML'),(1002, 'Web'),(1003, 'UI/UX');
+Query OK, 3 rows affected (0.080 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE students (    id INT PRIMARY KEY,    studentname VARCHAR(50),    c_id INT,    FOREIGN KEY (c_id) REFERENCES courses(course_id));
+ERROR 1050 (42S01): Table 'students' already exists
+mysql> CREATE TABLE students (    id INT PRIMARY KEY,    studentname VARCHAR(50),    c_id INT);
+ERROR 1050 (42S01): Table 'students' already exists
+mysql> CREATE TABLE RNW_STUDENTS (    id INT PRIMARY KEY,    studentname VARCHAR(50),    c_id INT);
+Query OK, 0 rows affected (0.108 sec)
+
+mysql> INSERT INTO RNW_STUDENTS (id, studentname, c_id)VALUES(1, 'Raj', 1001),(2, 'Rahul', 1003),(3, 'Sahil', 1001),(4, 'Krutarth', 1005);
+Query OK, 4 rows affected (0.043 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM RNW_STUDENTS;
++----+-------------+------+
+| id | studentname | c_id |
++----+-------------+------+
+|  1 | Raj         | 1001 |
+|  2 | Rahul       | 1003 |
+|  3 | Sahil       | 1001 |
+|  4 | Krutarth    | 1005 |
++----+-------------+------+
+4 rows in set (0.004 sec)
+
+mysql> SELECT * FROM COURSES;
++-----------+-------------+
+| course_id | course_name |
++-----------+-------------+
+|      1001 | AI/ML       |
+|      1002 | Web         |
+|      1003 | UI/UX       |
++-----------+-------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT COURSES.COURSE_NAME FROM COURSES;
++-------------+
+| COURSE_NAME |
++-------------+
+| AI/ML       |
+| Web         |
+| UI/UX       |
++-------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT COURSES.COURSE_NAME FROM COURSES AS C;
+ERROR 1054 (42S22): Unknown column 'COURSES.COURSE_NAME' in 'field list'
+mysql> SELECT C.COURSE_NAME FROM COURSES AS C;
++-------------+
+| COURSE_NAME |
++-------------+
+| AI/ML       |
+| Web         |
+| UI/UX       |
++-------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT * FROM RNW_STUDENTS;
++----+-------------+------+
+| id | studentname | c_id |
++----+-------------+------+
+|  1 | Raj         | 1001 |
+|  2 | Rahul       | 1003 |
+|  3 | Sahil       | 1001 |
+|  4 | Krutarth    | 1005 |
++----+-------------+------+
+4 rows in set (0.003 sec)
+
+mysql> SELECT S.STUDENTNAME FROM RNW_STUDENTS AS S;
++-------------+
+| STUDENTNAME |
++-------------+
+| Raj         |
+| Rahul       |
+| Sahil       |
+| Krutarth    |
++-------------+
+4 rows in set (0.003 sec)
+
+mysql> SELECT C.COURSE_NAME FROM COURSES AS C;
++-------------+
+| COURSE_NAME |
++-------------+
+| AI/ML       |
+| Web         |
+| UI/UX       |
++-------------+
+3 rows in set (0.003 sec)
+
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> LEFT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Raj         | AI/ML       |
+| Rahul       | UI/UX       |
+| Sahil       | AI/ML       |
+| Krutarth    | NULL        |
++-------------+-------------+
+4 rows in set (0.006 sec)
+
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM COURSES AS C
+    -> LEFT JOIN
+    -> RNW_STUDENTS AS S
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Sahil       | AI/ML       |
+| Raj         | AI/ML       |
+| NULL        | Web         |
+| Rahul       | UI/UX       |
++-------------+-------------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> RIGHT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Sahil       | AI/ML       |
+| Raj         | AI/ML       |
+| NULL        | Web         |
+| Rahul       | UI/UX       |
++-------------+-------------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT STUDENTNAME,COURSE_NAME FROM RNW_STUDENTS
+    -> RIGHT JOIN
+    -> COURSES
+    -> ON C_ID = COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Sahil       | AI/ML       |
+| Raj         | AI/ML       |
+| NULL        | Web         |
+| Rahul       | UI/UX       |
++-------------+-------------+
+4 rows in set (0.005 sec)
+
+mysql> SELECT ID,STUDENTNAME,COURSE_NAME FROM RNW_STUDENTS
+    -> RIGHT JOIN
+    -> COURSES
+    -> ON S.C_ID = C.COURSE_ID;
+ERROR 1054 (42S22): Unknown column 'S.C_ID' in 'on clause'
+mysql> SELECT ID,STUDENTNAME,COURSE_NAME FROM RNW_STUDENTS
+    -> RIGHT JOIN
+    -> COURSES
+    -> ON C_ID = COURSE_ID;
++------+-------------+-------------+
+| ID   | STUDENTNAME | COURSE_NAME |
++------+-------------+-------------+
+|    3 | Sahil       | AI/ML       |
+|    1 | Raj         | AI/ML       |
+| NULL | NULL        | Web         |
+|    2 | Rahul       | UI/UX       |
++------+-------------+-------------+
+4 rows in set (0.004 sec)
+
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> INNER JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Raj         | AI/ML       |
+| Rahul       | UI/UX       |
+| Sahil       | AI/ML       |
++-------------+-------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> OUTER JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OUTER JOIN
+COURSES AS C
+ON S.C_ID = C.COURSE_ID' at line 2
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Raj         | AI/ML       |
+| Rahul       | UI/UX       |
+| Sahil       | AI/ML       |
++-------------+-------------+
+3 rows in set (0.004 sec)
+
+mysql> SELECT S.STUDENT_NAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> LEFT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID
+    ->
+    -> UNION
+    ->
+    -> SELECT S.STUDENT_NAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> RIGHT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
+ERROR 1054 (42S22): Unknown column 'S.STUDENT_NAME' in 'field list'
+mysql> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> LEFT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID
+    ->
+    -> UNION
+    ->
+    -> SELECT S.STUDENTNAME,C.COURSE_NAME FROM RNW_STUDENTS AS S
+    -> RIGHT JOIN
+    -> COURSES AS C
+    -> ON S.C_ID = C.COURSE_ID;
++-------------+-------------+
+| STUDENTNAME | COURSE_NAME |
++-------------+-------------+
+| Raj         | AI/ML       |
+| Rahul       | UI/UX       |
+| Sahil       | AI/ML       |
+| Krutarth    | NULL        |
+| NULL        | Web         |
++-------------+-------------+
+5 rows in set (0.028 sec)

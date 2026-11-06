@@ -1,0 +1,128 @@
+CREATE DATABASE company_db;
+USE company_db;
+
+CREATE TABLE DEPARTMENT (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50),
+    location VARCHAR(50)
+);
+
+CREATE TABLE EMPLOYEE (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary DECIMAL(10,2),
+    dept_id INT NULL,
+);
+
+INSERT INTO DEPARTMENT VALUES
+(101, 'HR', 'Rajkot'),
+(102, 'IT', 'Ahmedabad'),
+(103, 'Finance', 'Surat'),
+(104, 'Marketing', 'Vadodara'),
+(105, 'Sales', 'Rajkot'),
+(106, 'Training', 'Surat'),
+(107, 'Support', 'Ahmedabad'),
+(108, 'Design', 'Vadodara'),
+(109, 'Research', 'Mumbai'),
+(110, 'Operations', 'Pune');
+
+
+CREATE TABLE EMPLOYEE (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary DECIMAL(10,2),
+    dept_id INT NULL
+);
+
+INSERT INTO EMPLOYEE VALUES
+(1, 'Rahul', 30000, 101),
+(2, 'Amit', 45000, 102),
+(3, 'Priya', 40000, 103),
+(4, 'Neha', 35000, 104),
+(5, 'Karan', 50000, 105),
+(6, 'Sahil', 32000, 102),
+(7, 'Riya', 42000, 106),
+(8, 'Jay', 28000, NULL),
+(9, 'Mehul', 38000, 103),
+(10, 'Krutarth', 55000, 111);
+
+
+==============================
+Display all records from the EMPLOYEE table.
+
+
+
+Display all records from the DEPARTMENT table.
+
+
+
+Display employee names and their department IDs.
+
+
+
+Display department names and their locations.
+
+
+
+Display employee names and salaries.
+
+
+
+Display employee names with their department names using INNER JOIN.
+
+
+
+Display employee names with their department locations using INNER JOIN.
+
+
+
+Display all employees with department names using LEFT JOIN.
+
+
+
+Display all departments with employee names using RIGHT JOIN.
+
+
+
+Display employee names and department names using table aliases.
+
+
+
+Display employees working in the IT department.
+
+
+
+Display employees working in the Finance department.
+
+
+
+Display employees whose salary is greater than ₹35,000.
+
+
+
+Display employees whose salary is less than ₹40,000 using INNER JOIN.
+
+
+
+Display employees working in departments located in Rajkot.
+
+
+
+Display employees who do not have a department assigned.
+
+
+
+Display employees whose department ID does not match any department ID.(SUB QUERY)
+
+
+
+Display departments that have no employees.
+
+
+
+Display all employees and departments, including unmatched records, using FULL OUTER JOIN logic.
+
+
+
+Display employee names, department names, and salaries in descending order of salary.
+============================

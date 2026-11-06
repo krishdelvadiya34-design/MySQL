@@ -1,0 +1,387 @@
+mysql> CREATE DATABASE company_db;
+Query OK, 1 row affected (0.586 sec)
+
+mysql> USE company_db;
+Database changed
+
+mysql> CREATE TABLE DEPARTMENT (
+    ->     dept_id INT PRIMARY KEY,
+    ->     dept_name VARCHAR(50),
+    ->     location VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.212 sec)
+
+mysql> CREATE TABLE EMPLOYEE(
+    -> emp_id INT PRIMARY KEY,
+    -> emp_name VARCHAR(50),
+    -> salary DECIMAL(10,2),
+    -> dep_id INT NULL
+    -> );
+Query OK, 0 rows affected (0.684 sec)
+
+mysql> INSERT INTO DEPARTMENT VALUES
+    -> (101, 'HR', 'Rajkot'),
+    -> (102, 'IT', 'Ahmedabad'),
+    -> (103, 'Finance', 'Surat'),
+    -> (104, 'Marketing', 'Vadodara'),
+    -> (105, 'Sales', 'Rajkot'),
+    -> (106, 'Training', 'Surat'),
+    -> (107, 'Support', 'Ahmedabad'),
+    -> (108, 'Design', 'Vadodara'),
+    -> (109, 'Research', 'Mumbai'),
+    -> (110, 'Operations', 'Pune');
+Query OK, 10 rows affected (0.066 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+==================================================================================================
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+----------+--------+
+| emp_id | emp_name | salary   | dep_id |
++--------+----------+----------+--------+
+|      1 | Rahul    | 30000.00 |    101 |
+|      2 | Amit     | 45000.00 |    102 |
+|      3 | Priya    | 40000.00 |    103 |
+|      4 | Neha     | 35000.00 |    104 |
+|      5 | Karan    | 50000.00 |    105 |
+|      6 | Sahil    | 32000.00 |    102 |
+|      7 | Riya     | 42000.00 |    106 |
+|      8 | Jay      | 28000.00 |   NULL |
+|      9 | Mehul    | 38000.00 |    103 |
+|     10 | Krutarth | 55000.00 |    111 |
++--------+----------+----------+--------+
+10 rows in set (0.007 sec)
+
+mysql> SELECT * FROM DEPARTMENT;
++---------+------------+-----------+
+| dept_id | dept_name  | location  |
++---------+------------+-----------+
+|     101 | HR         | Rajkot    |
+|     102 | IT         | Ahmedabad |
+|     103 | Finance    | Surat     |
+|     104 | Marketing  | Vadodara  |
+|     105 | Sales      | Rajkot    |
+|     106 | Training   | Surat     |
+|     107 | Support    | Ahmedabad |
+|     108 | Design     | Vadodara  |
+|     109 | Research   | Mumbai    |
+|     110 | Operations | Pune      |
++---------+------------+-----------+
+10 rows in set (0.524 sec)
+
+mysql> SELECT EMP_NAME,DEP_ID FROM EMPLOYEE;
++----------+--------+
+| EMP_NAME | DEP_ID |
++----------+--------+
+| Rahul    |    101 |
+| Amit     |    102 |
+| Priya    |    103 |
+| Neha     |    104 |
+| Karan    |    105 |
+| Sahil    |    102 |
+| Riya     |    106 |
+| Jay      |   NULL |
+| Mehul    |    103 |
+| Krutarth |    111 |
++----------+--------+
+10 rows in set (0.007 sec)
+
+mysql> SELECT DEPT_NAME,LOCATION FROM DEPARTMENT;
++------------+-----------+
+| DEPT_NAME  | LOCATION  |
++------------+-----------+
+| HR         | Rajkot    |
+| IT         | Ahmedabad |
+| Finance    | Surat     |
+| Marketing  | Vadodara  |
+| Sales      | Rajkot    |
+| Training   | Surat     |
+| Support    | Ahmedabad |
+| Design     | Vadodara  |
+| Research   | Mumbai    |
+| Operations | Pune      |
++------------+-----------+
+10 rows in set (0.007 sec)
+
+mysql> SELECT EMP_NAME,SALARY FROM EMPLOYEE;
++----------+----------+
+| EMP_NAME | SALARY   |
++----------+----------+
+| Rahul    | 30000.00 |
+| Amit     | 45000.00 |
+| Priya    | 40000.00 |
+| Neha     | 35000.00 |
+| Karan    | 50000.00 |
+| Sahil    | 32000.00 |
+| Riya     | 42000.00 |
+| Jay      | 28000.00 |
+| Mehul    | 38000.00 |
+| Krutarth | 55000.00 |
++----------+----------+
+10 rows in set (0.008 sec)
+
+mysql> SELECT E.EMP_NAME,D.DEPT_NAME FROM EMPLOYEE AS E
+    -> INNER JOIN
+    -> DEPARTMENT AS D
+    -> ON E.DEP_ID = D.DEPT_ID;
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Rahul    | HR        |
+| Amit     | IT        |
+| Priya    | Finance   |
+| Neha     | Marketing |
+| Karan    | Sales     |
+| Sahil    | IT        |
+| Riya     | Training  |
+| Mehul    | Finance   |
++----------+-----------+
+8 rows in set (0.009 sec)
+
+mysql> SELECT E.EMP_NAME,D.LOCATION FROM EMPLOYEE AS E
+    -> INNER JOIN
+    -> DEPARTMENT AS D
+    -> ON E.DEP_ID = D.DEPT_ID;
++----------+-----------+
+| EMP_NAME | LOCATION  |
++----------+-----------+
+| Rahul    | Rajkot    |
+| Amit     | Ahmedabad |
+| Priya    | Surat     |
+| Neha     | Vadodara  |
+| Karan    | Rajkot    |
+| Sahil    | Ahmedabad |
+| Riya     | Surat     |
+| Mehul    | Surat     |
++----------+-----------+
+8 rows in set (0.600 sec)
+
+mysql> SELECT E.EMP_NAME,D.DEPT_NAME FROM EMPLOYEE AS E
+    -> LEFT JOIN
+    -> DEPARTMENT AS D
+    -> ON E.DEP_ID = D.DEPT_ID;
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Rahul    | HR        |
+| Amit     | IT        |
+| Priya    | Finance   |
+| Neha     | Marketing |
+| Karan    | Sales     |
+| Sahil    | IT        |
+| Riya     | Training  |
+| Jay      | NULL      |
+| Mehul    | Finance   |
+| Krutarth | NULL      |
++----------+-----------+
+10 rows in set (0.012 sec)
+
+mysql> SELECT D.DEPT_NAME,E.EMP_NAME FROM DEPARTMENT AS D
+    -> RIGHT JOIN
+    -> EMPLOYEE AS E
+    -> ON D.DEPT_ID = E.DEP_ID;
++-----------+----------+
+| DEPT_NAME | EMP_NAME |
++-----------+----------+
+| HR        | Rahul    |
+| IT        | Amit     |
+| Finance   | Priya    |
+| Marketing | Neha     |
+| Sales     | Karan    |
+| IT        | Sahil    |
+| Training  | Riya     |
+| NULL      | Jay      |
+| Finance   | Mehul    |
+| NULL      | Krutarth |
++-----------+----------+
+10 rows in set (0.012 sec)
+
+mysql> SELECT E.EMP_NAME,D.DEPT_NAME FROM EMPLOYEE AS E
+    -> LEFT JOIN
+    -> DEPARTMENT AS D
+    -> ON E.DEP_ID = D.DEPT_ID;
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Rahul    | HR        |
+| Amit     | IT        |
+| Priya    | Finance   |
+| Neha     | Marketing |
+| Karan    | Sales     |
+| Sahil    | IT        |
+| Riya     | Training  |
+| Jay      | NULL      |
+| Mehul    | Finance   |
+| Krutarth | NULL      |
++----------+-----------+
+10 rows in set (0.012 sec)
+
+mysql> SELECT EMP_NAME,DEPT_NAME FROM EMPLOYEE
+    -> LEFT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> WHERE DEPT_NAME = "IT";
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Amit     | IT        |
+| Sahil    | IT        |
++----------+-----------+
+2 rows in set (0.012 sec)
+
+mysql> SELECT EMP_NAME,DEPT_NAME FROM EMPLOYEE
+    -> LEFT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> WHERE DEPT_NAME = "Finance";
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Priya    | Finance   |
+| Mehul    | Finance   |
++----------+-----------+
+2 rows in set (0.011 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE SALARY > 35000;
++--------+----------+----------+--------+
+| emp_id | emp_name | salary   | dep_id |
++--------+----------+----------+--------+
+|      2 | Amit     | 45000.00 |    102 |
+|      3 | Priya    | 40000.00 |    103 |
+|      5 | Karan    | 50000.00 |    105 |
+|      7 | Riya     | 42000.00 |    106 |
+|      9 | Mehul    | 38000.00 |    103 |
+|     10 | Krutarth | 55000.00 |    111 |
++--------+----------+----------+--------+
+6 rows in set (0.448 sec)
+
+mysql> SELECT EMP_NAME,SALARY,DEPT_NAME FROM EMPLOYEE
+    -> INNER JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> WHERE SALARY < 40000;
++----------+----------+-----------+
+| EMP_NAME | SALARY   | DEPT_NAME |
++----------+----------+-----------+
+| Rahul    | 30000.00 | HR        |
+| Neha     | 35000.00 | Marketing |
+| Sahil    | 32000.00 | IT        |
+| Mehul    | 38000.00 | Finance   |
++----------+----------+-----------+
+4 rows in set (0.424 sec)
+
+mysql> SELECT EMP_NAME,LOCATION FROM EMPLOYEE
+    -> JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> WHERE LOCATION = "Rajkot";
++----------+----------+
+| EMP_NAME | LOCATION |
++----------+----------+
+| Rahul    | Rajkot   |
+| Karan    | Rajkot   |
++----------+----------+
+2 rows in set (0.044 sec)
+
+mysql> SELECT EMP_NAME,DEPT_NAME FROM EMPLOYEE
+    -> LEFT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> WHERE DEPT_NAME IS NULL;
++----------+-----------+
+| EMP_NAME | DEPT_NAME |
++----------+-----------+
+| Jay      | NULL      |
+| Krutarth | NULL      |
++----------+-----------+
+2 rows in set (0.035 sec)
+
+
+
+
+
+
+
+
+
+
+mysql> SELECT DEPT_NAME,EMP_NAME FROM DEPARTMENT
+    -> LEFT JOIN
+    -> EMPLOYEE
+    -> ON DEPT_ID = DEP_ID
+    -> WHERE EMP_NAME IS NULL;
++------------+----------+
+| DEPT_NAME  | EMP_NAME |
++------------+----------+
+| Support    | NULL     |
+| Design     | NULL     |
+| Research   | NULL     |
+| Operations | NULL     |
++------------+----------+
+4 rows in set (0.016 sec)
+
+mysql> SELECT EMP_NAME,DEPT_NAME FROM EMPLOYEE
+    -> LEFT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    ->
+    -> UNION
+    ->
+    -> SELECT EMP_NAME,DEPT_NAME FROM EMPLOYEE
+    -> RIGHT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID;
++----------+------------+
+| EMP_NAME | DEPT_NAME  |
++----------+------------+
+| Rahul    | HR         |
+| Amit     | IT         |
+| Priya    | Finance    |
+| Neha     | Marketing  |
+| Karan    | Sales      |
+| Sahil    | IT         |
+| Riya     | Training   |
+| Jay      | NULL       |
+| Mehul    | Finance    |
+| Krutarth | NULL       |
+| NULL     | Support    |
+| NULL     | Design     |
+| NULL     | Research   |
+| NULL     | Operations |
++----------+------------+
+14 rows in set (0.525 sec)
+
+mysql> SELECT EMP_NAME,SALARY,DEPT_NAME FROM EMPLOYEE
+    -> LEFT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    ->
+    -> UNION
+    ->
+    -> SELECT EMP_NAME,SALARY,DEPT_NAME FROM EMPLOYEE
+    -> RIGHT JOIN
+    -> DEPARTMENT
+    -> ON DEP_ID = DEPT_ID
+    -> ORDER BY SALARY DESC;
++----------+----------+------------+
+| EMP_NAME | SALARY   | DEPT_NAME  |
++----------+----------+------------+
+| Krutarth | 55000.00 | NULL       |
+| Karan    | 50000.00 | Sales      |
+| Amit     | 45000.00 | IT         |
+| Riya     | 42000.00 | Training   |
+| Priya    | 40000.00 | Finance    |
+| Mehul    | 38000.00 | Finance    |
+| Neha     | 35000.00 | Marketing  |
+| Sahil    | 32000.00 | IT         |
+| Rahul    | 30000.00 | HR         |
+| Jay      | 28000.00 | NULL       |
+| NULL     |     NULL | Support    |
+| NULL     |     NULL | Design     |
+| NULL     |     NULL | Research   |
+| NULL     |     NULL | Operations |
++----------+----------+------------+
+14 rows in set (0.059 sec)
+
+========================================================================================
+
