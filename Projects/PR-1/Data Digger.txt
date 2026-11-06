@@ -1,8 +1,10 @@
-PR - 1 Data Digger :
+PR - 1 DATA DIGGER :
+====================
 
 ====================================================================================
 
-Customers Table:
+1. CUSTOMERS TABLE :
+--------------------
 
 mysql> CREATE DATABASE STORE;
 Query OK, 1 row affected (0.051 sec)
@@ -65,6 +67,7 @@ mysql> SELECT * FROM CUSTOMERS WHERE C_NAME LIKE "Alice";
 
 
 FINAL TABLE :
+-------------
 
 mysql> SELECT * FROM CUSTOMERS;
 +------+----------+-------------------------+------------------------------+
@@ -83,7 +86,8 @@ mysql> SELECT * FROM CUSTOMERS;
 
 ====================================================================================
 
-2. Orders Table :
+2. ORDERS TABLE :
+-----------------
 
 mysql> CREATE TABLE ORDERS (
     -> O_ID INT AUTO_INCREMENT,
@@ -147,6 +151,7 @@ mysql> SELECT MAX(TOTAL_AMOUNT) AS HIGHEST,MIN(TOTAL_AMOUNT) AS LOWEST ,AVG(TOTA
 
 
 FINAL TABLE :
+-------------
 
 mysql> SELECT * FROM ORDERS;
 +------+------+------------+--------------+
@@ -166,7 +171,8 @@ mysql> SELECT * FROM ORDERS;
 
 ====================================================================================
 
-3. Products Table :
+3. PRODUCTS TABLE :
+-------------------
 
 mysql> CREATE TABLE PRODUCTS (
     -> P_ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -238,6 +244,7 @@ mysql> SELECT * FROM PRODUCTS WHERE PRICE = (SELECT MIN(PRICE) FROM PRODUCTS);
 
 
 FINAL TABLE :
+-------------
 
 mysql> SELECT * FROM PRODUCTS;
 +------+--------------+-----------+-------+
@@ -257,7 +264,8 @@ mysql> SELECT * FROM PRODUCTS;
 
 ====================================================================================
 
-4. Order Details Table :
+4. ORDER DETAILS TABLE :
+------------------------
 
 mysql> CREATE TABLE O_DETAILS (
     -> OD_ID INT,
@@ -320,6 +328,7 @@ mysql> SELECT P_ID,COUNT(*) FROM O_DETAILS WHERE P_ID = 202 GROUP BY P_ID;
 
 
 FINAL TABLE :
+-------------
 
 mysql> SELECT * FROM O_DETAILS;
 +-------+------+------+----------+-----------+
@@ -337,6 +346,5 @@ mysql> SELECT * FROM O_DETAILS;
 |    10 |  109 |  208 |        1 |     18000 |
 +-------+------+------+----------+-----------+
 10 rows in set (0.011 sec)
-
 
 ====================================================================================
